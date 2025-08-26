@@ -144,14 +144,10 @@ videoWrappers.forEach((wrapper, index) => {
     const particles = wrapper.querySelectorAll('.video-particles span');
     const position = wrapper.dataset.position;
     
-    // Set initial position based on data attribute
-    let initialX = 0;
-    if (position === 'left') initialX = '-40vw';
-    if (position === 'right') initialX = '40vw';
-    
+    // All videos start from center (no horizontal offset)
     gsap.set(box, {
         scale: 0.5,
-        x: initialX,
+        x: 0, // Always center
         opacity: 0
     });
     

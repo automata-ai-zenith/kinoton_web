@@ -607,7 +607,6 @@ body {
 .media-section {
   padding: 5rem 0 0;
   position: relative;
-  background: #000; /* Dark background for media section */
 }
 
 .section-header {
@@ -637,7 +636,7 @@ body {
 /* Expanding Video Container */
 .expanding-video-container {
   position: relative;
-  min-height: 500vh; /* Further increased for 3 videos with proper spacing */
+  min-height: 600vh; /* Increased for 4 videos with proper spacing */
   padding: 5rem 0 10rem 0; /* Added bottom padding */
 }
 
@@ -651,18 +650,9 @@ body {
   margin-bottom: 100vh; /* Increased spacing for better scrolling */
 }
 
-.video-expand-wrapper[data-position='left'] {
-  justify-content: flex-start;
-  padding-left: 5%;
-}
-
+/* All videos expand from center */
 .video-expand-wrapper[data-position='center'] {
   justify-content: center;
-}
-
-.video-expand-wrapper[data-position='right'] {
-  justify-content: flex-end;
-  padding-right: 5%;
 }
 
 /* Last video wrapper extra spacing */
