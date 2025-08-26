@@ -46,30 +46,6 @@ body {
   background: var(--primary);
 }
 
-/* Fixed Animated Background */
-.animated-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 100vh;
-  background-image: url('bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: repeat-x;
-  z-index: -1;
-  opacity: 0.8;
-  animation: slideBackground 30s linear infinite;
-}
-
-@keyframes slideBackground {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
 
 /* Progress Bar */
 .progress-bar {

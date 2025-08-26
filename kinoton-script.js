@@ -61,18 +61,6 @@ dots.forEach((dot, index) => {
     });
 });
 
-// Animated Background Parallax Effect
-gsap.to('.animated-bg', {
-    xPercent: -10,
-    ease: 'none',
-    scrollTrigger: {
-        trigger: document.body,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1
-    }
-});
-
 // Hero section animations
 const heroTimeline = gsap.timeline();
 
@@ -292,19 +280,6 @@ if (ctaSecondary) {
         }
     });
 }
-
-// Enhanced background animation on mouse move
-document.addEventListener('mousemove', (e) => {
-    const mouseX = e.clientX / window.innerWidth;
-    const mouseY = e.clientY / window.innerHeight;
-    
-    gsap.to('.animated-bg', {
-        x: mouseX * 30 - 15,
-        y: mouseY * 20 - 10,
-        duration: 1.5,
-        ease: 'power2.out'
-    });
-});
 
 // Performance optimization - Refresh on resize
 let resizeTimer;
