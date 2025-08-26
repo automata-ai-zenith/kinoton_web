@@ -98,13 +98,7 @@ heroTimeline
         stagger: {
             each: 0.2
         }
-    }, '-=0.6')
-    .from('.scroll-indicator', {
-        duration: 0.8,
-        opacity: 0,
-        y: 30,
-        ease: 'power2.out'
-    }, '-=0.2');
+    }, '-=0.6');
 
 // Parallax effect for hero elements on scroll
 gsap.to('.hero-slogan', {
