@@ -195,7 +195,7 @@ videoWrappers.forEach((wrapper, index) => {
         .to(box, {
             width: '60vw',
             height: '50vh',
-            borderRadius: '15px',
+            borderRadius: 0,
             duration: 0.3,
             ease: 'power2.inOut'
         })
@@ -206,7 +206,7 @@ videoWrappers.forEach((wrapper, index) => {
         .to(box, {
             width: '90vw',
             height: '80vh',
-            borderRadius: '5px',
+            borderRadius: 0,
             duration: 0.3,
             ease: 'power2.inOut'
         })
