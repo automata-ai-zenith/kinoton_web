@@ -221,6 +221,24 @@ body {
   overflow: hidden;
 }
 
+/* Background video */
+.hero-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.hero-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 /* Logo at top center */
 .hero-logo {
   position: absolute;
@@ -589,6 +607,7 @@ body {
 .media-section {
   padding: 5rem 0 0;
   position: relative;
+  background: #000; /* Dark background for media section */
 }
 
 .section-header {
