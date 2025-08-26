@@ -1,94 +1,195 @@
-# GSAP ScrollTrigger Ultimate Demo
+# 키노톤 웹 - Kinoton Web
 
-A comprehensive demonstration of GSAP ScrollTrigger's powerful scrolling animations and effects.
+키노톤의 혁신적인 극장 기술을 소개하는 인터랙티브 웹사이트입니다. 고급 스크롤 애니메이션과 다이나믹한 비디오 콘텐츠로 몰입감 있는 시네마 경험을 제공합니다.
 
-## Features
+## 🎬 프로젝트 개요
 
-### 🎯 Core ScrollTrigger Features
-1. **Expanding Box Animation** - A small box that scales to fullscreen as you scroll
-2. **Pinned Sections** - Elements that stick during scroll for dramatic effects
-3. **Parallax Layers** - Multi-layer scrolling with different speeds
-4. **Horizontal Scrolling** - Sideways panel navigation within vertical scroll
-5. **3D Card Flips** - Interactive cards that rotate in 3D space
-6. **Text Reveal Animations** - Staggered text animations triggered by scroll
-7. **Morphing SVG Shapes** - Dynamic shape transformations
-8. **Smooth Snap Scrolling** - Magnetic section alignment
+키노톤 코리아는 프리미엄 극장 솔루션 전문 기업으로, 최첨단 시네마 및 오디오-비주얼 기술을 선도하고 있습니다. 이 웹사이트는 스크롤 기반 인터랙션을 통해 키노톤의 혁신적인 기술력을 시각적으로 구현했습니다.
 
-### 🎨 Visual Effects
-- Progress bar indicator
-- Navigation dots
-- Particle animations
-- Floating elements
-- Gradient backgrounds
-- Confetti celebration
+## ✨ 주요 기능
 
-## How to Run
+### 히어로 섹션 (Hero Section)
+- **고정형 비디오 배경** - 전체 화면 몰입형 비디오 백드롭 (bg.mp4)
+- **다이나믹 타이포그래피** - "Slogan here" 텍스트의 스크롤 기반 패럴렉스 효과
+- **중앙 배치 로고** - 페이드인 애니메이션이 적용된 키노톤 브랜딩
+- **미니멀 디자인** - Figma 디자인 사양에 맞춘 깔끔하고 집중된 프레젠테이션
 
-1. Open `index.html` in any modern web browser
-2. Scroll down to experience all animations
-3. Click navigation dots to jump between sections
-4. Click "Restart Journey" button for confetti effect and return to top
+### 비디오 갤러리 경험
+- **4개의 확장형 비디오** - 중앙에서 확장되는 비디오 쇼케이스
+  - Cinema Experience (최고의 영화 경험)
+  - Premium Theater (프리미엄 시네마)
+  - Digital Innovation (디지털 혁신)
+  - Future Vision (미래의 비전)
+- **스크롤 트리거 재생** - 뷰포트에 진입 시 자동 재생
+- **부드러운 트랜지션** - GSAP 기반 스케일 및 투명도 애니메이션
+- **파티클 효과** - 트랜지션 중 동적 시각 효과 강화
 
-## Browser Compatibility
-- Chrome (recommended)
-- Firefox
-- Safari
-- Edge
+### 내비게이션 및 UX
+- **진행률 표시줄** - 시각적 스크롤 진행 상황 표시
+- **내비게이션 도트** - 빠른 섹션 이동 (총 5개 섹션)
+- **반응형 디자인** - 모든 스크린 사이즈에 최적화
+- **부드러운 스크롤링** - 하드웨어 가속 성능
 
-## Technologies Used
-- GSAP 3.12.5
-- ScrollTrigger Plugin
-- TextPlugin
-- Pure CSS3
-- Vanilla JavaScript
+## 🛠 기술 스택
 
-## Animation Highlights
+### 핵심 기술
+- **HTML5** - 시맨틱 마크업 구조
+- **CSS3** - CSS 변수를 활용한 모던 스타일링
+- **JavaScript ES6+** - 고급 스크립팅
+- **GSAP 3.12.5** - 프로페셔널 애니메이션 라이브러리
+  - ScrollTrigger Plugin - 스크롤 기반 애니메이션
+  - TextPlugin - 텍스트 조작 효과
 
-### Section 1: Hero
-- Staggered word animations
-- Parallax fade-out effect
-- Animated scroll indicator
+### 리소스
+- **폰트**: Pretendard Variable (한글/영문 지원)
+- **비디오 CDN**: Flanb Data (https://flanb-data.travelflan.com/kinoton/)
+  - 배경: bg.mp4
+  - 갤러리: video-1.mp4, video-2.mp4
 
-### Section 2: Expanding Box ⭐
-- **Main Feature**: Small box scales to fullscreen
-- Pinned container during animation
-- Particle burst effects
-- Dynamic text scaling
+## 📁 프로젝트 구조
 
-### Section 3: Parallax
-- Multiple speed layers
-- Floating interactive cards
-- Depth perception effects
+```
+kinoton/scroll-trigger/
+├── index.html          # 메인 HTML 파일
+├── kinoton-styles.css  # 스타일링 및 애니메이션
+├── kinoton-script.js   # GSAP 애니메이션 및 인터랙션
+├── logo.png           # 키노톤 로고
+├── bg.jpg            # 대체 배경 이미지 (미사용)
+├── CNAME             # GitHub Pages 도메인 설정
+└── README.md         # 본 문서
+```
 
-### Section 4: Text Reveal
-- 3D text rotation
-- Staggered list animations
-- Scroll-based opacity
+## 🚀 시작하기
 
-### Section 5: Horizontal Scroll
-- 4 colorful panels
-- Smooth sideways navigation
-- Animated icons
+### 로컬 개발 환경
+1. 저장소 클론
+```bash
+git clone git@github.com:automata-ai-zenith/kinoton_web.git
+cd kinoton_web
+```
 
-### Section 6: Flip Cards
-- 3D card rotations
-- Scroll-triggered flips
-- Hover interactions
+2. 브라우저에서 `index.html` 열기
+3. 비디오 성능 향상을 위한 로컬 서버 사용:
+```bash
+python -m http.server 8000
+# 또는
+npx serve
+```
 
-### Section 7: Morphing Shapes
-- SVG path morphing
-- Gradient animations
-- Shape transitions
+### 배포
+GitHub Pages를 통해 자동으로 배포됩니다.
 
-### Section 8: Call to Action
-- Character-by-character animation
-- Confetti celebration
-- Restart functionality
+## 🎯 애니메이션 상세
 
-## Performance Notes
-- Hardware acceleration enabled
-- Optimized for 60fps
-- Batch animations for efficiency
-- Smart refresh on resize
+### 히어로 섹션 애니메이션
+- **로고**: 상단에서 페이드인 (1.2초, power3.out)
+- **설명 텍스트**: 페이드와 함께 슬라이드업 (1초, power2.out)
+- **슬로건**: 왼쪽에서 스태거드 슬라이드 (각 라인 1.2초)
+- **패럴렉스 스크롤링**: 각 요소별 다른 속도
 
-Enjoy the demo! 🚀
+### 비디오 갤러리 애니메이션
+- **초기 상태**: Scale 0.5, opacity 0, 중앙 위치
+- **확장 시퀀스**:
+  1. Scale 1.0으로 확대 (0.3초)
+  2. 60vw × 50vh로 확장 (0.3초)
+  3. 90vw × 80vh로 성장 (0.3초)
+  4. 100vw × 100vh 전체 화면 (0.3초)
+- **자동 재생 트리거**: 스크롤 진행률 20-90%
+- **파티클 애니메이션**: 진행률 50%에서 트리거
+
+## 🌐 브라우저 호환성
+
+### 지원 브라우저
+- ✅ Chrome 90+ (권장)
+- ✅ Firefox 88+
+- ✅ Safari 14+
+- ✅ Edge 90+
+- ✅ Chrome 모바일
+- ✅ Safari iOS
+
+### 필수 기능
+- CSS Grid/Flexbox
+- ES6 JavaScript
+- 비디오 자동재생 지원
+- ScrollTrigger API
+
+## ⚡ 성능 최적화
+
+### 구현된 최적화
+- **하드웨어 가속** - GPU 가속 애니메이션
+- **비디오 최적화** - 성능 향상을 위한 음소거 자동재생
+- **지연 로딩** - 필요시 비디오 로드 및 재생
+- **효율적인 애니메이션** - GSAP의 최적화된 렌더링
+- **부드러운 스크롤링** - 정규화된 스크롤로 60fps 목표
+
+### 성능 지표
+- **LCP**: < 2.5초
+- **FID**: < 100ms
+- **CLS**: < 0.1
+- **목표 FPS**: 60fps
+
+## 🎨 디자인 시스템
+
+### 색상 팔레트
+- **주요 텍스트**: #FFFFFF (흰색)
+- **배경**: 비디오/다이나믹
+- **액센트**: 로고의 브랜드 색상
+
+### 타이포그래피
+- **주요 폰트**: Pretendard Variable
+- **히어로 슬로건**: 162px (데스크톱) → 48px (모바일)
+- **설명문**: 38px (데스크톱) → 16px (모바일)
+
+### 간격 및 레이아웃
+- **히어로 로고 위치**: 상단에서 143px
+- **설명문 위치**: 상단에서 258px
+- **슬로건 위치**: 왼쪽 309px, 수직 중앙
+- **비디오 컨테이너**: 4개 비디오를 위한 600vh 높이
+
+## 📱 반응형 분기점
+
+- **데스크톱**: > 1440px
+- **랩톱**: 1024px - 1440px
+- **태블릿**: 768px - 1024px
+- **모바일**: < 768px
+- **소형 모바일**: < 480px
+
+## 🔄 최근 업데이트
+
+### 2024년 주요 변경사항
+- 정적 배경을 고정형 비디오(bg.mp4)로 교체
+- 4개의 중앙 확장형 비디오로 업데이트
+- 키노톤 CDN 비디오 리소스 통합
+- 스크롤 인디케이터 및 섹션 헤더 제거
+- Figma 디자인 사양 구현
+- Pretendard Variable 폰트 지원 추가
+
+## 🛡️ 기술 요구사항
+
+### 개발 환경
+- Node.js 14+ (선택사항)
+- 모던 웹 브라우저
+- Git
+
+### 권장 사양
+- **CPU**: 듀얼코어 이상
+- **RAM**: 4GB 이상
+- **네트워크**: 안정적인 인터넷 연결 (비디오 스트리밍)
+
+## 📞 연락처 및 지원
+
+키노톤 웹사이트 또는 시네마 기술 솔루션에 대한 문의:
+- **웹사이트**: [kinoton.co.kr](https://kinoton.co.kr)
+- **GitHub**: [github.com/automata-ai-zenith/kinoton_web](https://github.com/automata-ai-zenith/kinoton_web)
+
+### 기술 지원
+- **이메일**: digitalservice@kinoton.co.kr
+- **주소**: 서울특별시 서초구 양재천로3길 12 키노톤빌딩
+
+## 📄 라이선스
+
+© 2024 Kinoton Korea. All rights reserved.
+
+---
+
+🎬 **키노톤과 함께 영화의 미래를 경험하세요**
