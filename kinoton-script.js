@@ -76,35 +76,29 @@ gsap.to('.animated-bg', {
 // Hero section animations
 const heroTimeline = gsap.timeline();
 
-// KINOTON letters animation
+// Logo fade in animation
 heroTimeline
-    .from('.hero-title .char', {
-        duration: 1,
+    .from('.hero-logo', {
+        duration: 1.2,
         opacity: 0,
-        scale: 0,
-        y: 100,
-        rotationX: -90,
-        transformOrigin: '50% 50% -50',
-        ease: 'back.out(1.7)',
-        stagger: {
-            each: 0.1,
-            from: 'center'
-        }
+        y: -50,
+        ease: 'power3.out'
     })
-    .from('.hero-subtitle', {
-        duration: 0.8,
+    .from('.hero-description', {
+        duration: 1,
         opacity: 0,
         y: 30,
         ease: 'power2.out'
-    }, '-=0.5')
-    .from('.hero-cta button', {
-        duration: 0.8,
+    }, '-=0.8')
+    .from('.hero-slogan span', {
+        duration: 1.2,
         opacity: 0,
-        y: 30,
-        scale: 0.8,
-        ease: 'back.out(1.3)',
-        stagger: 0.2
-    }, '-=0.3')
+        x: -100,
+        ease: 'power3.out',
+        stagger: {
+            each: 0.2
+        }
+    }, '-=0.6')
     .from('.scroll-indicator', {
         duration: 0.8,
         opacity: 0,
@@ -112,9 +106,9 @@ heroTimeline
         ease: 'power2.out'
     }, '-=0.2');
 
-// Parallax effect for hero content on scroll
-gsap.to('.hero-content', {
-    yPercent: -50,
+// Parallax effect for hero elements on scroll
+gsap.to('.hero-slogan', {
+    yPercent: -30,
     opacity: 0,
     ease: 'none',
     scrollTrigger: {
@@ -122,6 +116,29 @@ gsap.to('.hero-content', {
         start: 'top top',
         end: 'bottom top',
         scrub: 0.5
+    }
+});
+
+gsap.to('.hero-description', {
+    yPercent: -20,
+    opacity: 0,
+    ease: 'none',
+    scrollTrigger: {
+        trigger: '.hero-section',
+        start: 'top top',
+        end: '80% top',
+        scrub: 0.3
+    }
+});
+
+gsap.to('.hero-logo', {
+    yPercent: -10,
+    ease: 'none',
+    scrollTrigger: {
+        trigger: '.hero-section',
+        start: 'top top',
+        end: '50% top',
+        scrub: 0.2
     }
 });
 
