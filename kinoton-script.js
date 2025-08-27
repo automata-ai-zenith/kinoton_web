@@ -4,6 +4,183 @@ gsap.registerPlugin(ScrollTrigger, TextPlugin);
 // Smooth scroll behavior
 ScrollTrigger.normalizeScroll(true);
 
+// Video Lazy Loading with Intersection Observer and Priority
+const setupVideoLazyLoading = () => {
+    const videos = document.querySelectorAll('.expand-video[data-src]');
+    const loadingQueue = [];
+    let isLoading = false;
+    
+    // Process video loading queue sequentially
+    const processLoadingQueue = async () => {
+        if (isLoading || loadingQueue.length === 0) return;
+        
+        isLoading = true;
+        const video = loadingQueue.shift();
+        const videoSrc = video.getAttribute('data-src');
+        
+        if (videoSrc && !video.hasAttribute('data-loaded')) {
+            const source = video.querySelector('source');
+            if (source) {
+                source.src = videoSrc;
+                
+                // For the last video, use lower priority loading
+                const videoIndex = Array.from(videos).indexOf(video);
+                if (videoIndex === videos.length - 1) {
+                    // Last video - load with lower priority
+                    video.setAttribute('preload', 'none');
+                    console.log('Loading last video with low priority:', videoSrc);
+                } else {
+                    // Other videos - normal loading
+                    video.setAttribute('preload', 'metadata');
+                }
+                
+                video.load();
+                video.setAttribute('data-loaded', 'true');
+                video.removeAttribute('data-src');
+                
+                console.log(`Loaded video ${videoIndex + 1}/${videos.length}:`, videoSrc);
+                
+                // Wait a bit before loading next video to avoid bandwidth congestion
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+        }
+        
+        isLoading = false;
+        processLoadingQueue(); // Process next video in queue
+    };
+    
+    const videoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const video = entry.target;
+                
+                if (!video.hasAttribute('data-loaded')) {
+                    // Add to queue instead of loading immediately
+                    if (!loadingQueue.includes(video)) {
+                        loadingQueue.push(video);
+                        processLoadingQueue();
+                    }
+                }
+                
+                // Stop observing this video
+                observer.unobserve(video);
+            }
+        });
+    }, {
+        // Adjust loading distance based on video position
+        rootMargin: '500px 0px',
+        threshold: 0.01
+    });
+    
+    // Start observing all videos with different strategies
+    videos.forEach((video, index) => {
+        if (index === videos.length - 1) {
+            // For the last video, use a different observer with larger margin
+            const lastVideoObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        
+                        // Delay loading of last video until user is closer
+                        setTimeout(() => {
+                            if (!video.hasAttribute('data-loaded') && !loadingQueue.includes(video)) {
+                                loadingQueue.push(video);
+                                processLoadingQueue();
+                            }
+                        }, 1000); // 1 second delay for last video
+                        
+                        observer.unobserve(video);
+                    }
+                });
+            }, {
+                // Last video loads when very close to viewport
+                rootMargin: '200px 0px',
+                threshold: 0.01
+            });
+            
+            lastVideoObserver.observe(video);
+        } else {
+            // Normal videos use standard observer
+            videoObserver.observe(video);
+        }
+    });
+};
+
+// Initialize lazy loading
+document.addEventListener('DOMContentLoaded', setupVideoLazyLoading);
+
+// Optimize last video specifically
+const optimizeLastVideo = () => {
+    const videos = document.querySelectorAll('.expand-video');
+    const lastVideo = videos[videos.length - 1];
+    
+    if (lastVideo) {
+        // Set specific attributes for last video
+        lastVideo.setAttribute('preload', 'none');
+        
+        // Optional: Request lower quality for last video if needed
+        const lastVideoWrapper = lastVideo.closest('.video-expand-wrapper');
+        if (lastVideoWrapper) {
+            lastVideoWrapper.setAttribute('data-priority', 'low');
+        }
+    }
+};
+
+// Run optimization after DOM is ready
+document.addEventListener('DOMContentLoaded', optimizeLastVideo);
+
+// Network-aware video optimization
+const optimizeVideoLoading = () => {
+    // Check connection type if available
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    
+    if (connection) {
+        const connectionType = connection.effectiveType;
+        const videos = document.querySelectorAll('.expand-video');
+        
+        // Adjust video loading strategy based on connection
+        if (connectionType === 'slow-2g' || connectionType === '2g') {
+            // On slow connections, increase lazy loading distance
+            console.log('Slow connection detected, optimizing video loading');
+            videos.forEach(video => {
+                video.setAttribute('preload', 'none');
+            });
+        } else if (connectionType === '4g') {
+            // On fast connections, preload metadata
+            console.log('Fast connection detected, enabling video preload');
+            const heroVideo = document.querySelector('.hero-background video');
+            if (heroVideo) {
+                heroVideo.setAttribute('preload', 'auto');
+            }
+        }
+        
+        // Monitor connection changes
+        connection.addEventListener('change', optimizeVideoLoading);
+    }
+};
+
+// Run optimization on load
+optimizeVideoLoading();
+
+// Performance monitoring
+const reportVideoPerformance = () => {
+    const videos = document.querySelectorAll('video');
+    videos.forEach((video, index) => {
+        video.addEventListener('loadstart', () => {
+            console.time(`Video ${index} load time`);
+        });
+        
+        video.addEventListener('canplay', () => {
+            console.timeEnd(`Video ${index} load time`);
+        });
+    });
+};
+
+// Enable performance monitoring in development
+if (window.location.hostname === 'localhost') {
+    reportVideoPerformance();
+}
+
 // Progress bar animation
 gsap.to('.progress-bar', {
     width: '100%',
@@ -179,9 +356,19 @@ videoWrappers.forEach((wrapper, index) => {
                     animateVideoParticles(particles);
                 }
                 
-                // Auto-play video when in view
+                // Auto-play video when in view and loaded
                 if (self.progress > 0.2 && self.progress < 0.9) {
-                    video.play().catch(e => console.log('Video play failed'));
+                    // Check if video is loaded before playing
+                    if (video.hasAttribute('data-loaded') || video.readyState >= 2) {
+                        video.play().catch(e => console.log('Video play failed'));
+                    } else {
+                        // If not loaded yet, wait for it to load then play
+                        video.addEventListener('loadeddata', function() {
+                            if (self.progress > 0.2 && self.progress < 0.9) {
+                                video.play().catch(e => console.log('Video play failed after load'));
+                            }
+                        }, { once: true });
+                    }
                 } else {
                     video.pause();
                 }
@@ -205,10 +392,7 @@ videoWrappers.forEach((wrapper, index) => {
             duration: 0.3,
             ease: 'power2.inOut'
         })
-        .to(content, {
-            opacity: 0,
-            duration: 0.2
-        }, '-=0.2')
+        // Keep content visible longer - fade out when video is almost full screen
         .to(box, {
             width: '90vw',
             height: '80vh',
@@ -216,6 +400,10 @@ videoWrappers.forEach((wrapper, index) => {
             duration: 0.3,
             ease: 'power2.inOut'
         })
+        .to(content, {
+            opacity: 0,
+            duration: 0.2
+        }, '-=0.1')  // Fade out content just before fullscreen
         .to(box, {
             width: '100vw',
             height: '100vh',

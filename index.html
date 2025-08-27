@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>키노톤 - 영화를 넘어선 경험</title>
+    
+    <!-- Preconnect to CDN for faster video loading -->
+    <link rel="preconnect" href="https://flanb-data.travelflan.com">
+    <link rel="dns-prefetch" href="https://flanb-data.travelflan.com">
+    
     <!-- Pretendard Font -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" href="kinoton-styles.css">
@@ -26,7 +31,7 @@
     <section class="hero-section">
         <!-- Background video -->
         <div class="hero-background">
-            <video autoplay muted loop playsinline>
+            <video autoplay muted loop playsinline preload="auto">
                 <source src="https://flanb-data.travelflan.com/kinoton/bg.mp4" type="video/mp4">
             </video>
         </div>
@@ -66,8 +71,8 @@
             <!-- 영상1 - 가운데에서 확장 -->
             <div class="video-expand-wrapper" data-position="center">
                 <div class="video-expand-box">
-                    <video class="expand-video" muted loop playsinline>
-                        <source src="https://flanb-data.travelflan.com/kinoton/video-1.mp4" type="video/mp4">
+                    <video class="expand-video" muted loop playsinline preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect fill='%23333' width='16' height='9'/%3E%3C/svg%3E" data-src="https://flanb-data.travelflan.com/kinoton/video-1.mp4">
+                        <source type="video/mp4">
                     </video>
                     <div class="video-expand-content">
                         <h3 class="video-title">WHO WE ARE: Media & Art Space Creator - KINOTON</h3>
@@ -82,8 +87,8 @@
             <!-- 영상2 - 가운데에서 확장 -->
             <div class="video-expand-wrapper" data-position="center">
                 <div class="video-expand-box">
-                    <video class="expand-video" muted loop playsinline>
-                        <source src="https://flanb-data.travelflan.com/kinoton/video-3.mp4" type="video/mp4">
+                    <video class="expand-video" muted loop playsinline preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect fill='%23333' width='16' height='9'/%3E%3C/svg%3E" data-src="https://flanb-data.travelflan.com/kinoton/video-3.mp4">
+                        <source type="video/mp4">
                     </video>
                     <div class="video-expand-content">
                         <h3 class="video-title">OUR WORKS: New York Times Square - '대한민국 광복 80주년' 및 '충남방문의 해' 홍보 영상 상영</h3>
@@ -98,8 +103,8 @@
             <!-- 영상3 - 가운데에서 확장 -->
             <div class="video-expand-wrapper" data-position="center">
                 <div class="video-expand-box">
-                    <video class="expand-video" muted loop playsinline>
-                        <source src="https://flanb-data.travelflan.com/kinoton/video-4.mp4" type="video/mp4">
+                    <video class="expand-video" muted loop playsinline preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect fill='%23333' width='16' height='9'/%3E%3C/svg%3E" data-src="https://flanb-data.travelflan.com/kinoton/video-4.mp4">
+                        <source type="video/mp4">
                     </video>
                     <div class="video-expand-content">
                         <h3 class="video-title">OUR WORKS: Megabox COEX - LED상영관 타임랩스</h3>
@@ -115,8 +120,8 @@
             <!-- 영상4 - 가운데에서 확장 -->
             <div class="video-expand-wrapper" data-position="center">
                 <div class="video-expand-box">
-                    <video class="expand-video" muted loop playsinline>
-                        <source src="https://flanb-data.travelflan.com/kinoton/video-2.mp4" type="video/mp4">
+                    <video class="expand-video" muted loop playsinline preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect fill='%23333' width='16' height='9'/%3E%3C/svg%3E" data-src="https://flanb-data.travelflan.com/kinoton/video-2.mp4">
+                        <source type="video/mp4">
                     </video>
                     <div class="video-expand-content">
                         <h3 class="video-title">OUR CULTURE: Hanwha Eagles X KINOTON 브랜드 데이</h3>
