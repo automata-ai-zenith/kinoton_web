@@ -28,7 +28,6 @@ const setupVideoLazyLoading = () => {
                 if (videoIndex === videos.length - 1) {
                     // Last video - load with lower priority
                     video.setAttribute('preload', 'none');
-                    console.log('Loading last video with low priority:', videoSrc);
                 } else {
                     // Other videos - normal loading
                     video.setAttribute('preload', 'metadata');
@@ -37,8 +36,6 @@ const setupVideoLazyLoading = () => {
                 video.load();
                 video.setAttribute('data-loaded', 'true');
                 video.removeAttribute('data-src');
-                
-                console.log(`Loaded video ${videoIndex + 1}/${videos.length}:`, videoSrc);
                 
                 // Wait a bit before loading next video to avoid bandwidth congestion
                 await new Promise(resolve => setTimeout(resolve, 100));
@@ -141,13 +138,11 @@ const optimizeVideoLoading = () => {
         // Adjust video loading strategy based on connection
         if (connectionType === 'slow-2g' || connectionType === '2g') {
             // On slow connections, increase lazy loading distance
-            console.log('Slow connection detected, optimizing video loading');
             videos.forEach(video => {
                 video.setAttribute('preload', 'none');
             });
         } else if (connectionType === '4g') {
             // On fast connections, preload metadata
-            console.log('Fast connection detected, enabling video preload');
             const heroVideo = document.querySelector('.hero-background video');
             if (heroVideo) {
                 heroVideo.setAttribute('preload', 'auto');
@@ -400,12 +395,12 @@ videoWrappers.forEach((wrapper, index) => {
                 if (self.progress > 0.2 && self.progress < 0.95) {
                     // Check if video is loaded before playing
                     if (video.hasAttribute('data-loaded') || video.readyState >= 2) {
-                        video.play().catch(e => console.log('Video play failed'));
+                        video.play().catch(e => {});
                     } else {
                         // If not loaded yet, wait for it to load then play
                         video.addEventListener('loadeddata', function() {
                             if (self.progress > 0.2 && self.progress < 0.95) {
-                                video.play().catch(e => console.log('Video play failed after load'));
+                                video.play().catch(e => {});
                             }
                         }, { once: true });
                     }
