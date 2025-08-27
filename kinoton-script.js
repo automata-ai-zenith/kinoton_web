@@ -320,19 +320,46 @@ gsap.to('.hero-logo', {
 });
 
 // EXPANDING VIDEO ANIMATIONS - Core Feature
+const isMobile = window.innerWidth <= 768;
+
 videoWrappers.forEach((wrapper, index) => {
     const box = wrapper.querySelector('.video-expand-box');
     const video = wrapper.querySelector('.expand-video');
     const content = wrapper.querySelector('.video-expand-content');
     const particles = wrapper.querySelectorAll('.video-particles span');
+    const soundToggle = wrapper.querySelector('.video-sound-toggle');
     const position = wrapper.dataset.position;
     
-    // All videos start from center (no horizontal offset)
-    gsap.set(box, {
-        scale: 0.5,
-        x: 0, // Always center
-        opacity: 0
-    });
+    // Mobile: fixed size, Desktop: animated scaling
+    if (isMobile) {
+        gsap.set(box, {
+            width: '90vw',
+            height: 'auto',
+            scale: 1,
+            opacity: 1
+        });
+    } else {
+        // All videos start from center (no horizontal offset)
+        gsap.set(box, {
+            scale: 0.5,
+            x: 0, // Always center
+            opacity: 0
+        });
+    }
+    
+    // Sound toggle functionality
+    if (soundToggle) {
+        soundToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (video.muted) {
+                video.muted = false;
+                soundToggle.classList.add('unmuted');
+            } else {
+                video.muted = true;
+                soundToggle.classList.remove('unmuted');
+            }
+        });
+    }
     
     // Pin each video wrapper
     ScrollTrigger.create({
@@ -356,61 +383,63 @@ videoWrappers.forEach((wrapper, index) => {
                     animateVideoParticles(particles);
                 }
                 
-                // Auto-play video when in view and loaded
-                if (self.progress > 0.2 && self.progress < 0.9) {
+                // Auto-play video when in view and loaded - keep playing until 95%
+                if (self.progress > 0.2 && self.progress < 0.95) {
                     // Check if video is loaded before playing
                     if (video.hasAttribute('data-loaded') || video.readyState >= 2) {
                         video.play().catch(e => console.log('Video play failed'));
                     } else {
                         // If not loaded yet, wait for it to load then play
                         video.addEventListener('loadeddata', function() {
-                            if (self.progress > 0.2 && self.progress < 0.9) {
+                            if (self.progress > 0.2 && self.progress < 0.95) {
                                 video.play().catch(e => console.log('Video play failed after load'));
                             }
                         }, { once: true });
                     }
-                } else {
+                } else if (self.progress >= 0.95) {
                     video.pause();
                 }
             }
         }
     });
     
-    // Build timeline based on scroll
-    expandTimeline
-        .to(box, {
-            scale: 1,
-            x: 0,
-            opacity: 1,
-            duration: 0.3,
-            ease: 'power2.out'
-        })
-        .to(box, {
-            width: '60vw',
-            height: '50vh',
-            borderRadius: 0,
-            duration: 0.3,
-            ease: 'power2.inOut'
-        })
-        // Keep content visible longer - fade out when video is almost full screen
-        .to(box, {
-            width: '90vw',
-            height: '80vh',
-            borderRadius: 0,
-            duration: 0.3,
-            ease: 'power2.inOut'
-        })
-        .to(content, {
-            opacity: 0,
-            duration: 0.2
-        }, '-=0.1')  // Fade out content just before fullscreen
-        .to(box, {
-            width: '100vw',
-            height: '100vh',
-            borderRadius: 0,
-            duration: 0.4,
-            ease: 'power2.inOut'
-        });
+    // Build timeline based on scroll - Skip for mobile
+    if (!isMobile) {
+        expandTimeline
+            .to(box, {
+                scale: 1,
+                x: 0,
+                opacity: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            })
+            .to(box, {
+                width: '60vw',
+                height: '50vh',
+                borderRadius: 0,
+                duration: 0.3,
+                ease: 'power2.inOut'
+            })
+            // Keep content visible longer - fade out when video is almost full screen
+            .to(box, {
+                width: '90vw',
+                height: '80vh',
+                borderRadius: 0,
+                duration: 0.3,
+                ease: 'power2.inOut'
+            })
+            .to(content, {
+                opacity: 0,
+                duration: 0.2
+            }, '-=0.1')  // Fade out content just before fullscreen
+            .to(box, {
+                width: '100vw',
+                height: '100vh',
+                borderRadius: 0,
+                duration: 0.4,
+                ease: 'power2.inOut'
+            });
+    }
 });
 
 // Particle animation function for videos

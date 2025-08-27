@@ -291,8 +291,8 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-  width: 174px;
-  height: 42px;
+  width: 122px;
+  height: 30px;
 }
 
 /* Top tagline below logo */
@@ -794,8 +794,8 @@ body {
   padding: 2rem;
   background: linear-gradient(
     180deg,
-    rgba(26, 26, 46, 0.8) 0%,
-    rgba(26, 26, 46, 0.9) 100%
+    rgba(26, 26, 46, 0.6) 0%,
+    rgba(26, 26, 46, 0.7) 100%
   );
   width: 100%;
   height: 100%;
@@ -805,6 +805,54 @@ body {
   justify-content: center;
   opacity: 1;
   transition: opacity 0.5s ease;
+}
+
+/* Video Sound Toggle Button */
+.video-sound-toggle {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.video-expand-box:hover .video-sound-toggle {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-sound-toggle:hover {
+  background: rgba(255, 107, 107, 0.8);
+  transform: scale(1.1);
+}
+
+.video-sound-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.video-sound-toggle .sound-on {
+  display: none;
+}
+
+.video-sound-toggle.unmuted .sound-on {
+  display: block;
+}
+
+.video-sound-toggle.unmuted .sound-off {
+  display: none;
 }
 
 .video-expand-box.expanded .video-expand-content {
@@ -1172,5 +1220,38 @@ body {
 
   .nav-dots {
     right: 15px;
+  }
+  
+  /* Mobile Video Fixes */
+  .video-expand-wrapper {
+    margin-bottom: 50vh; /* Less spacing on mobile */
+  }
+  
+  .video-expand-box {
+    width: 90vw !important;
+    height: auto !important;
+    aspect-ratio: 16/9;
+    position: relative;
+  }
+  
+  .expand-video {
+    aspect-ratio: 16/9;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .video-expand-content {
+    background: linear-gradient(
+      180deg,
+      rgba(26, 26, 46, 0.7) 0%,
+      rgba(26, 26, 46, 0.8) 100%
+    );
+  }
+  
+  /* Keep sound button visible on mobile tap */
+  .video-sound-toggle {
+    opacity: 1;
+    visibility: visible;
   }
 }
