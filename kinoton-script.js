@@ -471,10 +471,6 @@ videoWrappers.forEach((wrapper, index) => {
                 opacity: 0,
                 duration: 0.2
             }, '-=0.1')  // Fade out content just before fullscreen
-            .to(title, {
-                opacity: 0,
-                duration: 0.2
-            }, '-=0.3')  // Fade out title at the same time
             .to(box, {
                 width: '100vw',
                 height: '100vh',
