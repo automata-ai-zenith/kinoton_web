@@ -326,6 +326,7 @@ videoWrappers.forEach((wrapper, index) => {
     const box = wrapper.querySelector('.video-expand-box');
     const video = wrapper.querySelector('.expand-video');
     const content = wrapper.querySelector('.video-expand-content');
+    const title = wrapper.querySelector('.video-title'); // Title is now outside the box
     const particles = wrapper.querySelectorAll('.video-particles span');
     const soundToggle = wrapper.querySelector('.video-sound-toggle');
     const position = wrapper.dataset.position;
@@ -338,6 +339,12 @@ videoWrappers.forEach((wrapper, index) => {
             scale: 1,
             opacity: 1
         });
+        // Title stays visible on mobile
+        if (title) {
+            gsap.set(title, {
+                opacity: 1
+            });
+        }
     } else {
         // All videos start from center (no horizontal offset)
         gsap.set(box, {
@@ -345,6 +352,12 @@ videoWrappers.forEach((wrapper, index) => {
             x: 0, // Always center
             opacity: 0
         });
+        // Title starts visible on desktop
+        if (title) {
+            gsap.set(title, {
+                opacity: 1
+            });
+        }
     }
     
     // Sound toggle functionality
@@ -432,6 +445,10 @@ videoWrappers.forEach((wrapper, index) => {
                 opacity: 0,
                 duration: 0.2
             }, '-=0.1')  // Fade out content just before fullscreen
+            .to(title, {
+                opacity: 0,
+                duration: 0.2
+            }, '-=0.3')  // Fade out title at the same time
             .to(box, {
                 width: '100vw',
                 height: '100vh',
