@@ -317,6 +317,9 @@ gsap.to('.hero-logo', {
 // EXPANDING VIDEO ANIMATIONS - Core Feature
 const isMobile = window.innerWidth <= 768;
 
+// Track currently playing video
+let currentlyPlayingVideo = null;
+
 videoWrappers.forEach((wrapper, index) => {
     const box = wrapper.querySelector('.video-expand-box');
     const video = wrapper.querySelector('.expand-video');
@@ -404,25 +407,36 @@ videoWrappers.forEach((wrapper, index) => {
                 if (self.progress > 0.2) {
                     // Check if video is loaded before playing
                     if (video.hasAttribute('data-loaded') || video.readyState >= 2) {
+                        // Pause the currently playing video if it's different
+                        if (currentlyPlayingVideo && currentlyPlayingVideo !== video) {
+                            currentlyPlayingVideo.pause();
+                        }
                         video.play().catch(e => {});
+                        currentlyPlayingVideo = video;
                     } else {
                         // If not loaded yet, wait for it to load then play
                         video.addEventListener('loadeddata', function() {
                             if (self.progress > 0.2) {
+                                // Pause the currently playing video if it's different
+                                if (currentlyPlayingVideo && currentlyPlayingVideo !== video) {
+                                    currentlyPlayingVideo.pause();
+                                }
                                 video.play().catch(e => {});
+                                currentlyPlayingVideo = video;
                             }
                         }, { once: true });
                     }
                 }
             },
-            onLeave: () => {
-                // Pause video when scrolling away to next video
-                video.pause();
-            },
             onEnterBack: () => {
                 // Resume video when scrolling back
                 if (video.hasAttribute('data-loaded') || video.readyState >= 2) {
+                    // Pause the currently playing video if it's different
+                    if (currentlyPlayingVideo && currentlyPlayingVideo !== video) {
+                        currentlyPlayingVideo.pause();
+                    }
                     video.play().catch(e => {});
+                    currentlyPlayingVideo = video;
                 }
             }
         }
