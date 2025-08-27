@@ -60,6 +60,75 @@ body {
   transition: width 0.3s ease;
 }
 
+/* To Top Button */
+.to-top-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 107, 107, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: white;
+  box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+}
+
+.to-top-btn:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 30px rgba(255, 107, 107, 0.5);
+}
+
+.to-top-btn:active {
+  transform: translateY(-1px);
+}
+
+.to-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.to-top-btn svg {
+  width: 24px;
+  height: 24px;
+  animation: bounce-up 2s ease-in-out infinite;
+}
+
+@keyframes bounce-up {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Mobile responsive for To Top button */
+@media (max-width: 768px) {
+  .to-top-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+  }
+  
+  .to-top-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 /* Navigation Dots */
 .nav-dots {
   position: fixed;

@@ -500,6 +500,51 @@ window.addEventListener('resize', () => {
 // Initialize
 gsap.set('body', { visibility: 'visible' });
 
+// To Top Button Functionality
+const toTopBtn = document.querySelector('.to-top-btn');
+
+// Show/hide button based on scroll position
+const toggleToTopBtn = () => {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    
+    if (scrollPosition > windowHeight * 0.5) {
+        toTopBtn.classList.add('visible');
+    } else {
+        toTopBtn.classList.remove('visible');
+    }
+};
+
+// Smooth scroll to top
+const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+};
+
+// Add event listeners
+if (toTopBtn) {
+    // Click event for scrolling to top
+    toTopBtn.addEventListener('click', scrollToTop);
+    
+    // Keyboard accessibility
+    toTopBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            scrollToTop();
+        }
+    });
+}
+
+// Add scroll event listener for button visibility
+window.addEventListener('scroll', () => {
+    toggleToTopBtn();
+});
+
+// Initial check for button visibility
+toggleToTopBtn();
+
 // Easter egg - Konami code
 const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 let konamiIndex = 0;
