@@ -438,6 +438,20 @@ videoWrappers.forEach((wrapper, index) => {
                     video.play().catch(e => {});
                     currentlyPlayingVideo = video;
                 }
+            },
+            onLeaveBack: () => {
+                // Pause first video when scrolling above it
+                if (index === 0 && currentlyPlayingVideo === video) {
+                    video.pause();
+                    currentlyPlayingVideo = null;
+                }
+            },
+            onLeave: () => {
+                // Pause last video when scrolling below it
+                if (index === videoWrappers.length - 1 && currentlyPlayingVideo === video) {
+                    video.pause();
+                    currentlyPlayingVideo = null;
+                }
             }
         }
     });
