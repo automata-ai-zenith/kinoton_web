@@ -605,6 +605,7 @@ body {
 .media-section {
   padding: 5rem 0 0;
   position: relative;
+  overflow-x: hidden; /* Prevent horizontal overflow from videos */
 }
 
 .section-header {
@@ -739,6 +740,19 @@ body {
 .video-expand-box:hover .video-sound-toggle {
   opacity: 1;
   visibility: visible;
+}
+
+/* When video is fullscreen, keep sound button within viewport */
+.video-expand-box.video-fullscreen {
+  max-width: 100vw !important;
+  transform: scale(1) !important; /* Prevent any scale transforms at fullscreen */
+}
+
+.video-expand-box.video-fullscreen .video-sound-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
 }
 
 .video-sound-toggle:hover {
@@ -1069,6 +1083,20 @@ body {
   .video-sound-toggle {
     opacity: 1;
     visibility: visible;
+  }
+
+  /* Keep sound button in viewport on mobile fullscreen */
+  .video-expand-box.video-fullscreen {
+    max-width: 100vw !important;
+    width: 100vw !important; /* Force exact viewport width on mobile */
+    transform: scale(1) !important;
+  }
+  
+  .video-expand-box.video-fullscreen .video-sound-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
   }
 
   /* Video title styling for mobile */

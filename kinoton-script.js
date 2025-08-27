@@ -391,21 +391,38 @@ videoWrappers.forEach((wrapper, index) => {
                     animateVideoParticles(particles);
                 }
                 
-                // Auto-play video when in view and loaded - keep playing until 95%
-                if (self.progress > 0.2 && self.progress < 0.95) {
+                // Add fullscreen class when video reaches fullscreen
+                if (self.progress > 0.85) {
+                    box.classList.add('video-fullscreen');
+                    // Reset scale to prevent overflow when hovering at fullscreen
+                    gsap.set(box, { scale: 1 });
+                } else {
+                    box.classList.remove('video-fullscreen');
+                }
+                
+                // Auto-play video when in view and loaded - keep playing through fullscreen
+                if (self.progress > 0.2) {
                     // Check if video is loaded before playing
                     if (video.hasAttribute('data-loaded') || video.readyState >= 2) {
                         video.play().catch(e => {});
                     } else {
                         // If not loaded yet, wait for it to load then play
                         video.addEventListener('loadeddata', function() {
-                            if (self.progress > 0.2 && self.progress < 0.95) {
+                            if (self.progress > 0.2) {
                                 video.play().catch(e => {});
                             }
                         }, { once: true });
                     }
-                } else if (self.progress >= 0.95) {
-                    video.pause();
+                }
+            },
+            onLeave: () => {
+                // Pause video when scrolling away to next video
+                video.pause();
+            },
+            onEnterBack: () => {
+                // Resume video when scrolling back
+                if (video.hasAttribute('data-loaded') || video.readyState >= 2) {
+                    video.play().catch(e => {});
                 }
             }
         }
@@ -484,7 +501,7 @@ function animateVideoParticles(particles) {
 // Video hover effects
 document.querySelectorAll('.video-expand-box').forEach(box => {
     box.addEventListener('mouseenter', () => {
-        if (!box.classList.contains('expanded')) {
+        if (!box.classList.contains('expanded') && !box.classList.contains('video-fullscreen')) {
             gsap.to(box, {
                 scale: 1.05,
                 duration: 0.3,
@@ -494,7 +511,7 @@ document.querySelectorAll('.video-expand-box').forEach(box => {
     });
     
     box.addEventListener('mouseleave', () => {
-        if (!box.classList.contains('expanded')) {
+        if (!box.classList.contains('expanded') && !box.classList.contains('video-fullscreen')) {
             gsap.to(box, {
                 scale: 1,
                 duration: 0.3,
