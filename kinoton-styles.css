@@ -1058,7 +1058,7 @@ body {
   }
 
   .video-expand-box {
-    width: 90vw !important;
+    width: 100vw !important;
     height: auto !important;
     aspect-ratio: 16/9;
     position: relative;

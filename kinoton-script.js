@@ -332,7 +332,7 @@ videoWrappers.forEach((wrapper, index) => {
     // Mobile: fixed size, Desktop: animated scaling
     if (isMobile) {
         gsap.set(box, {
-            width: '90vw',
+            width: '100vw',
             height: 'auto',
             scale: 1,
             opacity: 1
