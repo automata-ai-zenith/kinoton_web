@@ -1073,11 +1073,10 @@ body {
   }
 
   .video-expand-content {
-    background: linear-gradient(
-      180deg,
-      rgba(26, 26, 46, 0.7) 0%,
-      rgba(26, 26, 46, 0.8) 100%
-    );
+    /* Remove dark overlay on mobile - videos should be visible */
+    background: transparent;
+    opacity: 0;
+    pointer-events: none;
   }
 
   /* Keep sound button visible on mobile tap */
