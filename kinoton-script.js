@@ -72,6 +72,12 @@ heroTimeline
         y: -50,
         ease: 'power3.out'
     })
+    .from('.hero-tagline', {
+        duration: 1,
+        opacity: 0,
+        y: 20,
+        ease: 'power2.out'
+    }, '-=0.8')
     .from('.hero-description', {
         duration: 1,
         opacity: 0,
@@ -101,9 +107,21 @@ gsap.to('.hero-slogan', {
     }
 });
 
+// Hero tagline - slight parallax, stays visible
+gsap.to('.hero-tagline', {
+    yPercent: -8,
+    ease: 'none',
+    scrollTrigger: {
+        trigger: '.hero-section',
+        start: 'top top',
+        end: '80% top',
+        scrub: 0.3
+    }
+});
+
+// Hero description - no fade out, only slight parallax
 gsap.to('.hero-description', {
-    yPercent: -20,
-    opacity: 0,
+    yPercent: -10,
     ease: 'none',
     scrollTrigger: {
         trigger: '.hero-section',
