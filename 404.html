@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - 페이지를 찾을 수 없습니다 | Kinoton Korea</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="요청하신 페이지를 찾을 수 없습니다. Kinoton Korea 메인 페이지로 이동해주세요.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="404 - 페이지를 찾을 수 없습니다 | Kinoton Korea">
+    <meta property="og:description" content="요청하신 페이지를 찾을 수 없습니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kinoton.travelflan.com/404">
+    <meta property="og:image" content="https://kinoton.travelflan.com/favicon.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    
+    <!-- Fonts -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Background video (reuse from main page) */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        /* 404 Container */
+        .error-container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out;
+            z-index: 10;
+        }
+        
+        /* 404 Number */
+        .error-code {
+            font-size: clamp(100px, 20vw, 200px);
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff0000, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -0.05em;
+            animation: glitch 2s infinite;
+        }
+        
+        /* Error Title */
+        .error-title {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        /* Error Message */
+        .error-message {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+        
+        /* Buttons Container */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0; /* Sharp corners as per design */
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ff0000, #ff6b6b);
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Glitch Animation */
+        @keyframes glitch {
+            0%, 100% {
+                text-shadow: 
+                    2px 2px 0 rgba(255, 0, 0, 0.5),
+                    -2px -2px 0 rgba(0, 255, 255, 0.5);
+            }
+            50% {
+                text-shadow: 
+                    -2px 2px 0 rgba(255, 0, 0, 0.5),
+                    2px -2px 0 rgba(0, 255, 255, 0.5);
+            }
+        }
+        
+        /* Fade In Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Particle Effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            animation: float 10s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .error-container {
+                padding: 1.5rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="https://flanb-data.travelflan.com/kinoton/bg.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Particles Effect -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Error Content -->
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">페이지를 찾을 수 없습니다</h1>
+        <p class="error-message">
+            요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.<br>
+            URL을 다시 확인하시거나 메인 페이지로 이동해주세요.
+        </p>
+        <div class="button-group">
+            <a href="/" class="btn btn-primary">메인 페이지로 이동</a>
+            <button onclick="history.back()" class="btn btn-secondary">이전 페이지로 돌아가기</button>
+        </div>
+    </div>
+    
+    <script>
+        // Create particle effect
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+        
+        // Log 404 error to analytics if available
+        if (typeof gtag !== 'undefined') {
+            gtag('event', '404_error', {
+                'page_location': window.location.href,
+                'page_referrer': document.referrer
+            });
+        }
+    </script>
+</body>
+</html>
