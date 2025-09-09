@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the Kinoton Korea interactive website showcasing cinema technology through scroll-triggered animations. It's a static site (no build process) deployed via GitHub Pages at kinoton.travelflan.com.
+This is the Kinoton Korea interactive website showcasing cinema technology through scroll-triggered animations. It's a static site (no build process) deployed via GitHub Pages at kinoton.co.kr.
 
 ## Development Setup
 
@@ -71,7 +71,7 @@ ScrollTrigger.defaults({ markers: true });
 ```
 
 ## Deployment
-Automatic via GitHub Pages on push to main branch. CNAME file points to kinoton.travelflan.com.
+Automatic via GitHub Pages on push to main branch. CNAME file points to kinoton.co.kr.
 
 ## Common Tasks
 
