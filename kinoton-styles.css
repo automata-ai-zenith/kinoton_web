@@ -1059,8 +1059,9 @@ body {
   }
 
   .video-expand-box {
-    width: 100vw !important;
-    height: auto !important;
+    /* Removed !important to allow JavaScript control */
+    width: 100vw;
+    height: auto;
     aspect-ratio: 16/9;
     position: relative;
   }
@@ -1087,11 +1088,11 @@ body {
 
   /* Keep sound button in viewport on mobile fullscreen */
   .video-expand-box.video-fullscreen {
-    max-width: 100vw !important;
-    width: 100vw !important; /* Force exact viewport width on mobile */
-    transform: scale(1) !important;
+    max-width: 100vw;
+    width: 100vw;
+    /* Removed transform !important to allow GSAP control */
   }
-  
+
   .video-expand-box.video-fullscreen .video-sound-toggle {
     position: fixed;
     bottom: 20px;
