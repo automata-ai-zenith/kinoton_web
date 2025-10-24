@@ -485,18 +485,58 @@ function initVideoAnimations() {
           }
         },
         onLeave: () => {
+          // For the last video, check actual visibility before pausing
           if (
             index === videoWrappers.length - 1 &&
             currentlyPlayingVideo === video
           ) {
-            video.pause();
-            currentlyPlayingVideo = null;
+            const rect = video.getBoundingClientRect();
+            // Only pause if video is completely out of view
+            if (rect.bottom < 0 || rect.top > window.innerHeight) {
+              video.pause();
+              currentlyPlayingVideo = null;
+            }
           }
         },
       },
     });
 
     videoScrollTriggers.push(expandTimeline.scrollTrigger);
+
+    // Add Intersection Observer for last video to handle visibility-based playback
+    if (index === videoWrappers.length - 1) {
+      const lastVideoObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              // Video is out of view - pause it
+              if (currentlyPlayingVideo === video) {
+                video.pause();
+                currentlyPlayingVideo = null;
+              }
+            } else {
+              // Video is in view - play it if ScrollTrigger progress allows
+              const scrollTrigger = expandTimeline.scrollTrigger;
+              if (scrollTrigger && scrollTrigger.progress > 0.2) {
+                if (video.hasAttribute('data-loaded') || video.readyState >= 2) {
+                  if (currentlyPlayingVideo && currentlyPlayingVideo !== video) {
+                    currentlyPlayingVideo.pause();
+                  }
+                  video.play().catch((e) => {});
+                  currentlyPlayingVideo = video;
+                }
+              }
+            }
+          });
+        },
+        {
+          threshold: 0.1, // Trigger when 10% of video is visible
+          rootMargin: '0px',
+        }
+      );
+
+      lastVideoObserver.observe(video);
+    }
 
     // Build timeline based on scroll - Skip for mobile
     if (!isMobile) {
