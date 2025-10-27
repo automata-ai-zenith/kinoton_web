@@ -635,7 +635,7 @@ body {
 /* Expanding Video Container */
 .expanding-video-container {
   position: relative;
-  min-height: 750vh; /* Increased for 5 videos with proper spacing */
+  min-height: 450vh; /* Adjusted for 3 videos with proper spacing */
   padding: 5rem 0 10rem 0; /* Added bottom padding */
 }
 
