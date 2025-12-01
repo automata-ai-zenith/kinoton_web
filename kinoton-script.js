@@ -823,3 +823,39 @@ function createConfetti() {
 // Debug mode (development only)
 // GSDevTools.create();
 // ScrollTrigger.defaults({ markers: true });
+
+// Safety Policy Popup Functionality
+const safetyPolicyLink = document.getElementById('safetyPolicyLink');
+const policyPopup = document.getElementById('policyPopup');
+const policyPopupClose = document.getElementById('policyPopupClose');
+
+if (safetyPolicyLink && policyPopup && policyPopupClose) {
+  // Open popup
+  safetyPolicyLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    policyPopup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+
+  // Close popup with X button
+  policyPopupClose.addEventListener('click', () => {
+    policyPopup.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+
+  // Close popup when clicking overlay
+  policyPopup.addEventListener('click', (e) => {
+    if (e.target === policyPopup) {
+      policyPopup.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Close popup with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && policyPopup.classList.contains('active')) {
+      policyPopup.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+}
